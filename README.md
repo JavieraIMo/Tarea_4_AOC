@@ -25,6 +25,3 @@
   > 📄                  # 
 
 ## 🛠️ Requisitos
-* Python 3.6 o superior
-* Editor recomendado: Visual Studio Code (VSC)
-* No requiere librerías externas
