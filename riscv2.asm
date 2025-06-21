@@ -82,7 +82,7 @@ encriptar_loop:
     li a7, 4
     ecall
     # Imprimir primer dígito hex
-    srl s4, t6, 4
+    srli s4, t6, 4
     andi s4, s4, 0xF
     la t5, hex_table
     add s5, t5, s4
