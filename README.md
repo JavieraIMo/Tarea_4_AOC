@@ -38,8 +38,8 @@ Este laboratorio consiste en la resolución de dos desafíos en lenguaje ensambl
 ```
 📁 tarea_4_aoc
 │
-├── 📄 riscv1.asm      # Desafío 1: Análisis térmico predictivo
-├── 📄 riscv2.asm      # Desafío 2: Código de misión con criptografía XOR
+├── 📄 sub1.asm      # Desafío 1: Análisis térmico predictivo
+├── 📄 sub2.asm      # Desafío 2: Código de misión con criptografía XOR
 └── 📄 README.md       # Este archivo
 ```
 
