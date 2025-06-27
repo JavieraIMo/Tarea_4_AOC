@@ -11,7 +11,7 @@
 
 .text
 main:
-    # Solicita la entrada del c�digo
+    # Solicita la entrada del código
     li a7, 4
     la a0, msg_code
     ecall
@@ -25,7 +25,7 @@ main:
     # Elimina una newline si existe
     jal eliminar_salto_de_linea
     
-    # Valida el c�digo
+    # Valida el cdigo
     jal validar_codigo
     beqz a0, codigo_invalido  
     
@@ -40,7 +40,7 @@ codigo_valido:
     j salir
     
 codigo_invalido:
-    # Muestra que el c�digo es inv�lido
+    # Muestra que el código es inválido
     li a7, 4
     la a0, msg_invalid
     ecall
@@ -49,7 +49,7 @@ salir:
     li a7, 10
     ecall
 
-# Funci�n para eliminar el salto de l�nea final en la cadena ingresada
+# Función para eliminar el salto de línea final en la cadena ingresada
 eliminar_salto_de_linea:
     la t0, buffer
 rm_loop:
@@ -66,8 +66,8 @@ rm_end:
 no_rm:
     jr ra
 
-# Funci�n para validar el c�digo ingresado
-# Osea valida que la cantidad de letras may�sculas sea par y de d�gitos sea impar
+# Función para validar el código ingresado
+# Osea valida que la cantidad de letras mayúsculas sea par y de dígitos sea impar
 
 validar_codigo:
     la t0, buffer
@@ -79,7 +79,6 @@ bucle_validacion:
     beqz t3, fin_validacion
     li t4, 10
     beq t3, t4, fin_validacion
-
     
     li t4, 'A'
     blt t3, t4, no_mayuscula
@@ -112,7 +111,7 @@ invalido:
     li a0, 0
     jr ra
 
-# Funci�n para encriptar el c�digo con XOR y mostrarlo en formato hexadecimal
+# Función para encriptar el código con XOR y mostrarlo en formato hexadecimal
 encriptar_e_imprimir:
     addi sp, sp, -12
     sw ra, 0(sp)
@@ -166,7 +165,7 @@ fin_encriptar:
     addi sp, sp, 12
     jr ra
 
-# Funci�n para imprimir un byte en formato hexadecimal (0x??)
+# Función para imprimir un byte en formato hexadecimal (0x??)
 
 imprimir_byte_hexadecimal:
     mv t0, a0
@@ -187,4 +186,3 @@ imprimir_byte_hexadecimal:
     ecall
 
     jr ra
-

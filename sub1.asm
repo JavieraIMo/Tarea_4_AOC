@@ -1,22 +1,22 @@
 .data
     msg_n:        .asciz "Ingrese la cantidad de temperaturas 'n': "
-    msg_k:        .asciz "Ingrese el tamaño del bloque 'k': "
-    msg_array:    .asciz "Ingrese las temperaturas como num1, num2,...: "
+    msg_k:        .asciz "Ingrese el tamano del bloque 'k': "
+    msg_array:    .asciz "Ingrese las temperaturas como num1, num2, num3,...: "
     msg_blocks:   .asciz "Bloques crecientes: "
     msg_trend:    .asciz "Tendencia detectada desde indice "
     msg_no_trend: .asciz "Sin tendencias detectadas"
     plus:         .asciz " -> "
     newline:      .asciz "\n"
-    error_msg:    .asciz "Error: Formato de entrada inválido\n"
+    error_msg:    .asciz "Error: Formato de entrada invÃ¡lido\n"
     
     buffer:       .space 256   # Buffer para almacenar la entrada del usuario
-    temp_str:     .space 12    # Espacio temporal para cada número leído como string
+    temp_str:     .space 12    # Espacio temporal para cada nÃºmero leÃ­do como string
     n:            .word 0
     k:            .word 0
-    temperatures: .space 400   # Máximo 100 enteros (4 bytes c/u)
-    sums:         .space 400   # Sumas móviles (bloques)
-    trend_start:   .word -1      # Índice de inicio de la tendencia
-    trend_end:     .word -1      # Índice de fin de la tendencia
+    temperatures: .space 400   # MÃ¡ximo 100 enteros (4 bytes c/u)
+    sums:         .space 400   # Sumas mÃ³viles (bloques)
+    trend_start:   .word -1      # Ã­ndice de inicio de la tendencia
+    trend_end:     .word -1      # Ã­ndice de fin de la tendencia
 .text
 main:
     # Muestra el mensaje y lee el n (cantidad de temperaturas)
@@ -28,7 +28,7 @@ main:
     la t0, n
     sw a0, 0(t0)
 
-    # Muestra el mensaje y lee el k (tamaño del bloque)
+    # Muestra el mensaje y lee el k (tamaÃ±o del bloque)
     li a7, 4
     la a0, msg_k
     ecall
@@ -37,7 +37,7 @@ main:
     la t0, k
     sw a0, 0(t0)
 
-    # Pide temperaturas como string (con una coma de separación por lo menos)
+    # Pide temperaturas como string (con una coma de separaciÃ³n por lo menos)
     li a7, 4
     la a0, msg_array
     ecall
@@ -46,12 +46,12 @@ main:
     li a1, 256
     ecall
 
-    # Procesar cadena para extraer números individuales
+    # Procesar cadena para extraer nÃºmeros individuales
     la s0, buffer     
     la s1, temperatures
     li s2, 0          
     lw s3, n          
-#Función para 'limpiar' la cadena y verificarla
+#FunciÃ³n para 'limpiar' la cadena y verificarla
 procesar_cadena:
     lbu t0, 0(s0)          # Lee el caracter actual
     beqz t0, verificar_cantidad  
@@ -66,13 +66,13 @@ procesar_cadena:
     li t1, ' '
     beq t0, t1, ignorar_caracter
 
-    # Verifica si es un dígito
+    # Verifica si es un dÃ­gito
     li t1, '0'
     blt t0, t1, entrada_invalida
     li t1, '9'
     bgt t0, t1, entrada_invalida
 
-    # Extrae el número entero desde la cadena
+    # Extrae el nÃºmero entero desde la cadena
     la s4, temp_str
     li s5, 0
 
@@ -83,7 +83,7 @@ extraer_numero:
     addi s0, s0, 1
     lbu t0, 0(s0)
 
-    # Seguir mientras sea dígito
+    # Seguir mientras sea dÃ­gito
     li t1, '0'
     blt t0, t1, terminar_extraccion
     li t1, '9'
@@ -108,7 +108,7 @@ verificar_cantidad:
     bne s2, s3, entrada_invalida
 
 fin_proceso:
-    # Salta a calcular sumas móviles (bloques de k)
+    # Salta a calcular sumas mÃ³viles (bloques de k)
     jal calcular_sumas_moviles
     
     # Salta a detectar si hay tendencia creciente
@@ -128,9 +128,7 @@ entrada_invalida:
     li a7, 10
     ecall
 
-
-
-#Convierte un número desde string (ASCII) a entero
+#Convierte un nÃºmero desde string (ASCII) a entero
 convertir_cadena_a_entero:   
     li t0, 0         
     li t1, 0         
@@ -156,7 +154,6 @@ fin_conversion:
 devolver:
     mv a0, t0
     jr ra
-
 
 # Calcula la suma de cada bloque de k temperaturas consecutivas
 calcular_sumas_moviles:
@@ -188,7 +185,6 @@ suma_bloque:
     blt t5, t4, ciclo_bloques
     jr ra
 
-
 detectar_tendencia:
     addi sp, sp, -16
     sw s0, 0(sp)
@@ -202,13 +198,11 @@ detectar_tendencia:
     sub s3, s1, s2          
     addi s3, s3, 1          
     
-    
     li t0, -1
     la t1, trend_start
     sw t0, 0(t1)
     la t1, trend_end
     sw t0, 0(t1)
-    
     
     li t0, 3
     blt s3, t0, fin_detectar
@@ -223,12 +217,10 @@ detectar_tendencia:
 buscar_tendencia:
     bge t1, t5, verificar_secuencia  
     
-    
     slli t6, t1, 2
     add t6, s0, t6         
     lw a3, 0(t6)           
     lw a4, 4(t6)           
-    
     
     bgt a4, a3, es_creciente
     j no_creciente
@@ -237,7 +229,6 @@ es_creciente:
     
     li a5, -1
     beq t3, a5, nuevo_inicio
-    
     
     addi t2, t2, 1         
     addi t4, t1, 1         
@@ -253,7 +244,6 @@ no_creciente:
     
     li a5, 2
     bge t2, a5, guardar_tendencia  
-    
     
     li t2, 0
     li t3, -1
@@ -290,17 +280,14 @@ mostrar_resultados:
     lw t0, trend_start
     bltz t0, sin_tendencia
 
-    
     li a7, 4
     la a0, msg_blocks
     ecall
 
-    
     lw t1, trend_end
     la t2, sums
     slli t3, t0, 2       
     add t2, t2, t3       
-    
     
     sub t4, t1, t0
     addi t4, t4, 1
@@ -311,7 +298,6 @@ imprimir_tendencia:
     li a7, 1
     ecall
     
-    
     addi t4, t4, -1
     beqz t4, fin_tendencia_impresa
     
@@ -320,7 +306,6 @@ imprimir_tendencia:
     la a0, plus
     ecall
     
-    
     addi t2, t2, 4
     j imprimir_tendencia
 
@@ -328,7 +313,6 @@ fin_tendencia_impresa:
     li a7, 4
     la a0, newline
     ecall
-    
     
     li a7, 4
     la a0, msg_trend
