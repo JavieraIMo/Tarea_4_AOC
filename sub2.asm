@@ -11,7 +11,7 @@
 
 .text
 main:
-    # Solicita la entrada del código
+    # Solicita la entrada del cï¿½digo
     li a7, 4
     la a0, msg_code
     ecall
@@ -25,22 +25,22 @@ main:
     # Elimina una newline si existe
     jal eliminar_salto_de_linea
     
-    # Valida el código
+    # Valida el cï¿½digo
     jal validar_codigo
     beqz a0, codigo_invalido  
     
 codigo_valido:
-    # Muestra que el código es válido
+    # Encripta y muestra el resultado primero
+    jal encriptar_e_imprimir
+    
     li a7, 4
     la a0, msg_valid
     ecall
     
-    # Encripta y muestra el resultado
-    jal encriptar_e_imprimir
     j salir
     
 codigo_invalido:
-    # Muestra que el código es inválido
+    # Muestra que el cï¿½digo es invï¿½lido
     li a7, 4
     la a0, msg_invalid
     ecall
@@ -49,7 +49,7 @@ salir:
     li a7, 10
     ecall
 
-# Función para eliminar el salto de línea final en la cadena ingresada
+# Funciï¿½n para eliminar el salto de lï¿½nea final en la cadena ingresada
 eliminar_salto_de_linea:
     la t0, buffer
 rm_loop:
@@ -66,8 +66,8 @@ rm_end:
 no_rm:
     jr ra
 
-# Función para validar el código ingresado
-# Osea valida que la cantidad de letras mayúsculas sea par y de dígitos sea impar
+# Funciï¿½n para validar el cï¿½digo ingresado
+# Osea valida que la cantidad de letras mayï¿½sculas sea par y de dï¿½gitos sea impar
 
 validar_codigo:
     la t0, buffer
@@ -112,7 +112,7 @@ invalido:
     li a0, 0
     jr ra
 
-# Función para encriptar el código con XOR y mostrarlo en formato hexadecimal
+# Funciï¿½n para encriptar el cï¿½digo con XOR y mostrarlo en formato hexadecimal
 encriptar_e_imprimir:
     addi sp, sp, -12
     sw ra, 0(sp)
@@ -166,7 +166,7 @@ fin_encriptar:
     addi sp, sp, 12
     jr ra
 
-# Función para imprimir un byte en formato hexadecimal (0x??)
+# Funciï¿½n para imprimir un byte en formato hexadecimal (0x??)
 
 imprimir_byte_hexadecimal:
     mv t0, a0
