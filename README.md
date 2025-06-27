@@ -72,6 +72,37 @@ Este laboratorio consiste en la resolución de dos desafíos en lenguaje ensambl
 
 ---
 
+## 📊 Ejemplos de uso
+
+### Programa 1: Análisis Térmico Predictivo (sub1.asm)
+
+**Ejemplo de entrada y salida:**
+
+```
+Ingrese la cantidad de temperaturas 'n': 8
+Ingrese el tamano del bloque 'k': 3
+Ingrese las temperaturas como num1, num2, num3,...: 10,12,13,15,18,14,17,20
+Bloques crecientes: 35 -> 40 -> 46 -> 47 -> 49 -> 51
+Tendencia detectada desde indice 0
+```
+
+**Notas sobre el formato de entrada:**
+- Para las temperaturas, ingrese los números separados por comas
+- El programa soporta espacios después de las comas: `10, 12, 13` (correcto también)
+- Formatos incorrectos: `10.12.13` (con puntos)
+
+### Programa 2: Códigos de Misión (sub2.asm)
+
+**Ejemplo de entrada y salida:**
+
+```
+Ingrese el codigo de mision: X7J9Z2K
+Codigo encriptado: [0x02, 0x6D, 0x10, 0x63, 0x00, 0x68, 0x11]
+Codigo valido
+```
+
+---
+
 ## ⚠️ Nota importante sobre el PDF de la tarea
 
 En la tabla de cálculos XOR proporcionada en el PDF de la tarea, hay un error de tipeo en el cálculo del carácter '7':
